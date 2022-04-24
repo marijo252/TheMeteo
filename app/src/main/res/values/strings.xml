@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">The Meteo</string>
+    <string name="hourly_forecast">HOURLY FORECAST</string>
+    <string name="daily_forecast">DAILY FORECAST</string>
+    <string name="air_quality">AIR QUALITY</string>
+    <string name="see_more">See more</string>
+    <string name="sunrise_sunset">SUNRISE / SUNSET</string>
+    <string name="current_data">CURRENT DATA</string>
+    <string name="uv_index">UV INDEX</string>
+    <string name="humidity">HUMIDITY</string>
+    <string name="feels_like">FEELS LIKE</string>
+    <string name="wind">WIND</string>
+    <string name="visibility">VISIBILITY</string>
+    <string name="pressure">PRESSURE</string>
+</resources>
