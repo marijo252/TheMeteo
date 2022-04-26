@@ -63,6 +63,7 @@ data class DailyWeather(
     val date: Date,
     @Json(name = "temp")
     val temperature: TemperatureMaxMin,
+    val weather: List<WeatherDescription>,
 ): Parcelable
 
 @Parcelize
@@ -133,6 +134,14 @@ fun List<DailyWeather>.asDomainDailyWeather(): List<com.example.android.themeteo
         com.example.android.themeteo.domains.DailyWeather(
             date = it.date,
             temperature = it.temperature.asDomainTemperatureMaxMin(),
+            weather = it.weather.map { weatherDescription ->
+                com.example.android.themeteo.domains.WeatherDescription(
+                    id = weatherDescription.id,
+                    main = weatherDescription.main,
+                    description = weatherDescription.description,
+                    icon = weatherDescription.icon,
+                )
+            },
         )
     }
 }

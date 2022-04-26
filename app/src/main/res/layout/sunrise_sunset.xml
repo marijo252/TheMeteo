@@ -1,74 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/container">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/sunrise_sunset"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="@string/sunrise_sunset"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <View
-        android:id="@+id/divider"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="8dp"
-        android:background="?android:attr/listDivider"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sunrise_sunset" />
-
-    <ImageView
-        android:id="@+id/image_sunrise"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/image_sunset"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:srcCompat="@drawable/sunrise" />
-
-    <ImageView
-        android:id="@+id/image_sunset"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/image_sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:srcCompat="@drawable/sunset_ic" />
-
-    <TextView
-        android:id="@+id/sunrise_time"
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/image_sunrise"
-        app:layout_constraintStart_toStartOf="@+id/image_sunrise"
-        app:layout_constraintTop_toBottomOf="@+id/image_sunrise"
-        tools:text="06:35" />
+        android:background="@drawable/container">
 
-    <TextView
-        android:id="@+id/sunset_time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="@+id/image_sunset"
-        app:layout_constraintStart_toStartOf="@+id/image_sunset"
-        app:layout_constraintTop_toBottomOf="@+id/image_sunset"
-        tools:text="20:24" />
+        <TextView
+            android:id="@+id/sunrise_sunset"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/roboto"
+            android:text="@string/sunrise_sunset"
+            android:textColor="@color/white"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="8dp"
+            android:background="?android:attr/listDivider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/sunrise_sunset" />
+
+        <ImageView
+            android:id="@+id/image_sunrise"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/image_sunset"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:srcCompat="@drawable/sunrise" />
+
+        <ImageView
+            android:id="@+id/image_sunset"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/image_sunrise"
+            app:layout_constraintTop_toBottomOf="@+id/divider"
+            app:srcCompat="@drawable/sunset_ic" />
+
+        <TextView
+            android:id="@+id/sunrise_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/image_sunrise"
+            app:layout_constraintStart_toStartOf="@+id/image_sunrise"
+            app:layout_constraintTop_toBottomOf="@+id/image_sunrise"
+            tools:text="06:35" />
+
+        <TextView
+            android:id="@+id/sunset_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@+id/image_sunset"
+            app:layout_constraintStart_toStartOf="@+id/image_sunset"
+            app:layout_constraintTop_toBottomOf="@+id/image_sunset"
+            tools:text="20:24" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

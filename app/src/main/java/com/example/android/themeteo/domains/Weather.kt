@@ -42,6 +42,7 @@ data class HourlyWeather(
 data class DailyWeather(
     val date: Date,
     val temperature: TemperatureMaxMin,
+    val weather: List<WeatherDescription>,
 )
 
 data class TemperatureMaxMin(
