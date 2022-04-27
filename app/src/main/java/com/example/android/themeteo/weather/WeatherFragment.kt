@@ -176,6 +176,7 @@ class WeatherFragment : Fragment() {
                 if (location != null) {
                     _viewModel.updateLocation(location.latitude, location.longitude)
                     _viewModel.refreshWeather()
+                    _viewModel.getData()
                 } else {
                     Log.e(TAG, "location is off")
                 }

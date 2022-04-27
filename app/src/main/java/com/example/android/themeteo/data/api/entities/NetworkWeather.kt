@@ -1,26 +1,21 @@
 package com.example.android.themeteo.data.api.entities
 
-import android.os.Parcelable
-import androidx.lifecycle.Transformations.map
 import com.example.android.themeteo.data.database.DatabaseWeather
 import com.squareup.moshi.Json
-import kotlinx.parcelize.Parcelize
 import java.util.*
 
-@Parcelize
 data class NetworkWeather(
     @Json(name = "lat")
     val latitude: Double,
     @Json(name = "lon")
     val longitude: Double,
-    val timeZone: String,
+    val timezone: String,
     val current: CurrentWeather,
     val hourly: List<HourlyWeather>,
     val daily: List<DailyWeather>,
-    val alerts: List<Alerts>
-) : Parcelable
+    val alerts: List<Alerts>?
+)
 
-@Parcelize
 data class CurrentWeather(
     @Json(name = "dt")
     val date: Date,
@@ -38,41 +33,37 @@ data class CurrentWeather(
     val windSpeed: Double,
     @Json(name = "wind_deg")
     val windDegree: Double,
+    @Json(name = "weather")
     val weatherDescription: List<WeatherDescription>
-) : Parcelable
+)
 
-@Parcelize
 data class WeatherDescription(
     val id: Int,
     val main: String,
     val description: String,
     val icon: String
-) : Parcelable
+)
 
-@Parcelize
 data class HourlyWeather(
     @Json(name = "dt")
     val date: Date,
     @Json(name = "temp")
     val temperature: Double,
-) : Parcelable
+)
 
-@Parcelize
 data class DailyWeather(
     @Json(name = "dt")
     val date: Date,
     @Json(name = "temp")
     val temperature: TemperatureMaxMin,
     val weather: List<WeatherDescription>,
-): Parcelable
+)
 
-@Parcelize
 data class TemperatureMaxMin(
     val min: Double,
     val max: Double
-): Parcelable
+)
 
-@Parcelize
 data class Alerts(
     @Json(name = "sender_name")
     val senderName: String,
@@ -82,13 +73,13 @@ data class Alerts(
     @Json(name = "end")
     val eventEnd: Date,
     val description: String,
-): Parcelable
+)
 
 fun NetworkWeather.asDatabaseEntity(): DatabaseWeather{
     return DatabaseWeather(
         latitude = latitude,
         longitude = longitude,
-        timeZone = timeZone,
+        timezone = timezone,
         current = current,
         hourly = hourly,
         daily = daily,

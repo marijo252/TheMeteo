@@ -24,6 +24,7 @@ interface OpenWeatherService {
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
+    .add(NetworkDateAdapter())
     .build()
 
 object Network{

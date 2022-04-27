@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/image_hour_temp"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="15" />
+        tools:text="15°" />
 
     <TextView
         android:id="@+id/temperature"

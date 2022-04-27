@@ -5,11 +5,11 @@ import java.util.*
 data class Weather(
     val latitude: Double,
     val longitude: Double,
-    val timeZone: String,
+    val timezone: String,
     val current: CurrentWeather,
     val hourly: List<HourlyWeather>,
     val daily: List<DailyWeather>,
-    val alerts: List<Alerts>
+    val alerts: List<Alerts>?
 )
 
 data class CurrentWeather(

@@ -22,7 +22,7 @@ class MyApp : Application() {
                     get() as DataSource
                 )
             }
-            single { Repository(get()) }
+            single { Repository(get()) as DataSource }
             single { LocalDB.createWeatherDao(this@MyApp) }
         }
 

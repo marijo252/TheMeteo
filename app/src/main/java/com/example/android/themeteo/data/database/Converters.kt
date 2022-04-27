@@ -1,17 +1,22 @@
 package com.example.android.themeteo.data.database
 
 import androidx.room.TypeConverter
+import com.example.android.themeteo.data.api.NetworkDateAdapter
 import com.example.android.themeteo.data.api.entities.Alerts
 import com.example.android.themeteo.data.api.entities.CurrentWeather
 import com.example.android.themeteo.data.api.entities.DailyWeather
 import com.example.android.themeteo.data.api.entities.HourlyWeather
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.Types
+import com.squareup.moshi.*
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CurrentWeatherConverters {
-    private val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .add(DateAdapter())
+        .build()
     private val jsonAdapter: JsonAdapter<CurrentWeather> = moshi.adapter(CurrentWeather::class.java)
 
     @TypeConverter
@@ -26,7 +31,10 @@ class CurrentWeatherConverters {
 }
 
 class ListOfHourlyWeatherConverters {
-    private val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .add(DateAdapter())
+        .build()
     private val list: Type = Types.newParameterizedType(
         List::class.java,
         HourlyWeather::class.java
@@ -46,7 +54,10 @@ class ListOfHourlyWeatherConverters {
 }
 
 class ListOfDailyWeatherConverters {
-    private val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .add(DateAdapter())
+        .build()
     private val list: Type = Types.newParameterizedType(
         List::class.java,
         DailyWeather::class.java
@@ -66,7 +77,10 @@ class ListOfDailyWeatherConverters {
 }
 
 class ListOfAlertsConverters {
-    private val moshi: Moshi = Moshi.Builder().build()
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .add(DateAdapter())
+        .build()
     private val list: Type = Types.newParameterizedType(
         List::class.java,
         Alerts::class.java
@@ -83,3 +97,33 @@ class ListOfAlertsConverters {
         return jsonAdapter.toJson(value)
     }
 }
+
+class DateAdapter: JsonAdapter<Date>() {
+    private val dateFormat = SimpleDateFormat(SERVER_FORMAT, Locale.getDefault())
+
+    @FromJson
+    override fun fromJson(reader: JsonReader): Date? {
+        return try {
+            val dateAsString = reader.nextString()
+            synchronized(dateFormat) {
+                dateFormat.parse(dateAsString)
+            }
+        } catch (e: Exception) {
+            null
+        }
+    }
+
+    @ToJson
+    override fun toJson(writer: JsonWriter, value: Date?) {
+        if (value != null) {
+            synchronized(dateFormat) {
+                writer.value(value.toString())
+            }
+        }
+    }
+
+    companion object {
+        const val SERVER_FORMAT = ("yyyy-MM-dd'T'HH:mm") // define your server format here
+    }
+}
+
