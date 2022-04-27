@@ -1,5 +1,6 @@
 package com.example.android.themeteo.data
 
+import android.util.Log
 import com.example.android.themeteo.data.api.Network
 import com.example.android.themeteo.data.database.WeatherDao
 import com.example.android.themeteo.data.api.entities.asDatabaseEntity
@@ -15,16 +16,25 @@ class Repository (
 ) : DataSource {
 
     override suspend fun refreshWeather(latitude: Double,longitude: Double) {
-        val weather = Network.retrofitService.getWeather(latitude, longitude)
-        weatherDao.insert(weather.asDatabaseEntity())
+        try{
+            val weather = Network.retrofitService.getWeather(latitude, longitude)
+            weatherDao.insert(weather.asDatabaseEntity())
+        }catch (ex: Exception){
+            Log.e(TAG,"error: $ex")
+        }
     }
 
     override suspend fun getWeather(): Result<Weather> {
         return try {
-            Result.Success(weatherDao.getWeather().asDomain())
+            val weatherDomain = weatherDao.getWeather().asDomain()
+            Result.Success(weatherDomain)
         } catch (ex: Exception){
+            Log.e(TAG,"error: $ex")
             Result.Error(ex.localizedMessage)
         }
+    }
+    companion object{
+        private const val TAG = "Repository"
     }
 
 }

@@ -25,16 +25,17 @@
 
             <TextView
                 android:id="@+id/current_temperature"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:shadowColor="#A1A1A1"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="10"
+                android:text="@{@string/temperature(weatherViewModel.weather.current.temperature)}"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="50sp"
-                android:text="@{@string/currentTempValue(weatherViewModel.weather.current.temperature)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,13 +44,14 @@
 
             <TextView
                 android:id="@+id/city"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:shadowColor="#A1A1A1"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="10"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="20sp"
                 app:layout_constraintBottom_toTopOf="@+id/current_temperature"
@@ -60,15 +62,16 @@
 
             <TextView
                 android:id="@+id/current_weather_desc"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto"
                 android:shadowColor="#A1A1A1"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="10"
-                android:textColor="@color/white"
                 android:text="@{weatherViewModel.weather.current.weatherDescription[0].description}"
+                android:textAlignment="center"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/current_temperature"
@@ -76,12 +79,13 @@
 
             <TextView
                 android:id="@+id/highest_lowest_T"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:shadowColor="#A1A1A1"
                 android:shadowDx="1"
                 android:shadowDy="1"
                 android:shadowRadius="10"
+                android:textAlignment="center"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,15 +95,23 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerView"
-            android:layout_width="409dp"
-            android:layout_height="548dp"
-            android:layout_marginStart="1dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/main_temperature_container" />
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

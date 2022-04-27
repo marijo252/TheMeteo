@@ -18,7 +18,8 @@ class NetworkDateAdapter: JsonAdapter<Date>(){
     @Throws(IOException::class)
     @FromJson
     override fun fromJson(reader: JsonReader): Date? {
-        return Date(reader.nextLong() * 1000)
+        val date = Date(reader.nextLong() * 1000)
+        return date
     }
 
     @Synchronized

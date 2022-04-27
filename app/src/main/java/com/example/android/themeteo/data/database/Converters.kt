@@ -123,7 +123,7 @@ class DateAdapter: JsonAdapter<Date>() {
     }
 
     companion object {
-        const val SERVER_FORMAT = ("yyyy-MM-dd'T'HH:mm") // define your server format here
+        const val SERVER_FORMAT = ("EEE MMM dd HH:mm:ss zzz yyyy") // define your server format here
     }
 }
 

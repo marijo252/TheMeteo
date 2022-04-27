@@ -9,7 +9,7 @@ data class Weather(
     val current: CurrentWeather,
     val hourly: List<HourlyWeather>,
     val daily: List<DailyWeather>,
-    val alerts: List<Alerts>?
+    val alerts: List<Alerts>?,
 )
 
 data class CurrentWeather(
@@ -24,14 +24,14 @@ data class CurrentWeather(
     val visibility: Double,
     val windSpeed: Double,
     val windDegree: Double,
-    val weatherDescription: List<WeatherDescription>
+    val weatherDescription: List<WeatherDescription>,
 )
 
 data class WeatherDescription(
     val id: Int,
     val main: String,
     val description: String,
-    val icon: String
+    val icon: String,
 )
 
 data class HourlyWeather(
@@ -47,7 +47,7 @@ data class DailyWeather(
 
 data class TemperatureMaxMin(
     val min: Double,
-    val max: Double
+    val max: Double,
 )
 
 data class Alerts(

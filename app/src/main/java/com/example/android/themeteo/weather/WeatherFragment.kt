@@ -14,11 +14,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Space
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.android.themeteo.BuildConfig
 import com.example.android.themeteo.R
@@ -28,6 +30,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
+
 
 class WeatherFragment : Fragment() {
     val _viewModel: WeatherViewModel by viewModel()
@@ -48,12 +51,17 @@ class WeatherFragment : Fragment() {
                 inflater,
                 R.layout.fragment_weather, container, false
             )
+        binding.lifecycleOwner = this
         binding.weatherViewModel = _viewModel
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
             adapter = weatherAdapter
+        }
+
+        _viewModel.weatherRecyclerView.observe(viewLifecycleOwner){ result ->
+            weatherAdapter.items = result
         }
 
         requestPermissionLauncher =
@@ -175,8 +183,7 @@ class WeatherFragment : Fragment() {
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
                     _viewModel.updateLocation(location.latitude, location.longitude)
-                    _viewModel.refreshWeather()
-                    _viewModel.getData()
+                    _viewModel.refreshWeatherAndGetData()
                 } else {
                     Log.e(TAG, "location is off")
                 }
