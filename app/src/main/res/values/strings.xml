@@ -22,4 +22,9 @@
     <string name="visibility_value">%.0f m</string>
     <string name="pressure_value">%.0f hPa</string>
     <string name="wind_value">%.2f m/s</string>
+    <string name="air_quality_good">Good</string>
+    <string name="air_quality_fair">Fair</string>
+    <string name="air_quality_moderate">Moderate</string>
+    <string name="air_quality_poor">Poor</string>
+    <string name="air_quality_very_poor">Very poor</string>
 </resources>

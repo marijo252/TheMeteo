@@ -13,4 +13,10 @@ interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(weather: DatabaseWeather)
+
+    @Query("SELECT * FROM AirPollution ORDER BY id DESC LIMIT 1")
+    suspend fun getAirPollution(): DatabaseAirPollution
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insert(airPollution: DatabaseAirPollution)
 }

@@ -11,6 +11,7 @@ import com.example.android.themeteo.data.DataSource
 import com.example.android.themeteo.domains.Weather
 import kotlinx.coroutines.launch
 import com.example.android.themeteo.data.Result
+import com.example.android.themeteo.domains.AirPollution
 import java.text.SimpleDateFormat
 
 class WeatherViewModel(
@@ -21,6 +22,10 @@ class WeatherViewModel(
     private val _weather = MutableLiveData<Weather>()
     val weather: LiveData<Weather>
         get() = _weather
+
+    private val _airPollution = MutableLiveData<AirPollution>()
+    val airPollution: LiveData<AirPollution>
+        get() = _airPollution
 
     private val _weatherRecyclerView = MutableLiveData<List<WeatherRecyclerViewItem>>()
     val weatherRecyclerView: LiveData<List<WeatherRecyclerViewItem>>
@@ -43,10 +48,11 @@ class WeatherViewModel(
     fun refreshWeatherAndGetData() {
         viewModelScope.launch {
             dataSource.refreshWeather(latitude.value!!, longitude.value!!)
-            val result = dataSource.getWeather()
-            when (result) {
+            val weatherResult = dataSource.getWeather()
+            val airPollutionResult = dataSource.getAirPollution()
+            when (weatherResult) {
                 is Result.Success<*> -> {
-                    val weather = result.data as Weather
+                    val weather = weatherResult.data as Weather
                     _weather.value = weather
 
                     val todayWeather = WeatherRecyclerViewItem.TodayData(
@@ -71,6 +77,7 @@ class WeatherViewModel(
                                 date = it.date,
                                 minTemperature = it.temperature.min,
                                 maxTemperature = it.temperature.max,
+                                url = "http://openweathermap.org/img/wn/${it.weather[0].icon}@2x.png"
                             )
                         }
                     )
@@ -83,6 +90,27 @@ class WeatherViewModel(
                 }
                 is Result.Error ->
                     Log.e(TAG, "Error trying to get weather ")
+            }
+            when(airPollutionResult){
+                is Result.Success<*> -> {
+                    val airPollution = airPollutionResult.data as AirPollution
+                    _airPollution.value = airPollution
+
+                    val airQuality = WeatherRecyclerViewItem.AirQuality(
+                        aqi = airPollution.airPollutionData[0].main.aqi,
+                        co = airPollution.airPollutionData[0].components.co,
+                        no = airPollution.airPollutionData[0].components.no,
+                        no2 = airPollution.airPollutionData[0].components.no2,
+                        o3 = airPollution.airPollutionData[0].components.o3,
+                        so2 = airPollution.airPollutionData[0].components.so2,
+                        pm2_5 = airPollution.airPollutionData[0].components.pm2_5,
+                        pm10 = airPollution.airPollutionData[0].components.pm10,
+                        nh3 = airPollution.airPollutionData[0].components.nh3,
+                    )
+                    _weatherRecyclerView.value?.plus(airQuality)
+                }
+                is Result.Error ->
+                    Log.e(TAG, "Error trying to get air Pollution ")
             }
         }
     }

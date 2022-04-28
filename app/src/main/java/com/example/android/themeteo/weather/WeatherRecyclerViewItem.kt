@@ -25,6 +25,19 @@ sealed class WeatherRecyclerViewItem {
             val date: Date,
             val minTemperature: Double,
             val maxTemperature: Double,
+            val url: String
         )
     }
+
+    data class AirQuality(
+        val aqi: Int,
+        val co: Double,
+        val no: Double,
+        val no2: Double,
+        val o3: Double,
+        val so2: Double,
+        val pm2_5: Double,
+        val pm10: Double,
+        val nh3: Double,
+    ) : WeatherRecyclerViewItem()
 }

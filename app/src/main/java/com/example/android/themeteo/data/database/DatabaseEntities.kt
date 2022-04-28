@@ -4,7 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.example.android.themeteo.data.api.entities.*
+import com.example.android.themeteo.domains.AirPollution
 import com.example.android.themeteo.domains.Weather
+import com.squareup.moshi.Json
 
 
 @Entity(tableName = "Weather")
@@ -20,6 +22,14 @@ data class DatabaseWeather constructor(
     @ColumnInfo(name = "alerts")val alerts: List<Alerts>?,
 )
 
+@Entity(tableName = "AirPollution")
+data class DatabaseAirPollution constructor(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")val id: Long = 0L,
+    @ColumnInfo(name = "coordinates")val coordinates: Coordinates,
+    @ColumnInfo(name = "airPollutionData")val airPollutionData: List<AirPollutionData>,
+)
+
 fun DatabaseWeather.asDomain(): Weather{
     return Weather(
         latitude = latitude,
@@ -29,5 +39,12 @@ fun DatabaseWeather.asDomain(): Weather{
         hourly = hourly.asDomainHourlyWeather(),
         daily = daily.asDomainDailyWeather(),
         alerts = alerts?.asDomainAlerts(),
+    )
+}
+
+fun DatabaseAirPollution.asDomain(): AirPollution{
+    return AirPollution(
+        coordinates = coordinates.asDomainCoordinates(),
+        airPollutionData = airPollutionData.asDomainAirPolllutionData(),
     )
 }

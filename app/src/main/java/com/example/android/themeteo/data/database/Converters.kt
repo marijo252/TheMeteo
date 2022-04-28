@@ -2,10 +2,7 @@ package com.example.android.themeteo.data.database
 
 import androidx.room.TypeConverter
 import com.example.android.themeteo.data.api.NetworkDateAdapter
-import com.example.android.themeteo.data.api.entities.Alerts
-import com.example.android.themeteo.data.api.entities.CurrentWeather
-import com.example.android.themeteo.data.api.entities.DailyWeather
-import com.example.android.themeteo.data.api.entities.HourlyWeather
+import com.example.android.themeteo.data.api.entities.*
 import com.squareup.moshi.*
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.lang.reflect.Type
@@ -94,6 +91,45 @@ class ListOfAlertsConverters {
 
     @TypeConverter
     fun listOfAlertsToString(value: List<Alerts>?): String? {
+        return jsonAdapter.toJson(value)
+    }
+}
+
+class CoordinatesConverters {
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+    private val jsonAdapter: JsonAdapter<Coordinates> = moshi.adapter(Coordinates::class.java)
+
+    @TypeConverter
+    fun fromString(value: String?): Coordinates? {
+        return value?.let { jsonAdapter.fromJson(it) }
+    }
+
+    @TypeConverter
+    fun currentWeatherToString(value: Coordinates?): String? {
+        return jsonAdapter.toJson(value)
+    }
+}
+
+class ListOfAirPollutionDataConverters {
+    private val moshi: Moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .add(DateAdapter())
+        .build()
+    private val list: Type = Types.newParameterizedType(
+        List::class.java,
+        AirPollutionData::class.java
+    )
+    private val jsonAdapter: JsonAdapter<List<AirPollutionData>> = moshi.adapter(list)
+
+    @TypeConverter
+    fun fromString(value: String?): List<AirPollutionData>? {
+        return value?.let { jsonAdapter.fromJson(it) }
+    }
+
+    @TypeConverter
+    fun listOfAlertsToString(value: List<AirPollutionData>?): String? {
         return jsonAdapter.toJson(value)
     }
 }

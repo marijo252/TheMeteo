@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.IntentSender
 import android.content.pm.PackageManager
+import android.graphics.drawable.Drawable
 import android.location.Location
 import android.net.Uri
 import android.os.Bundle
@@ -14,14 +15,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Space
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.target.CustomTarget
+import com.bumptech.glide.request.transition.Transition
 import com.example.android.themeteo.BuildConfig
 import com.example.android.themeteo.R
 import com.example.android.themeteo.databinding.FragmentWeatherBinding
@@ -30,6 +32,7 @@ import com.google.android.gms.location.*
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import java.util.*
 
 
 class WeatherFragment : Fragment() {
@@ -62,6 +65,46 @@ class WeatherFragment : Fragment() {
 
         _viewModel.weatherRecyclerView.observe(viewLifecycleOwner){ result ->
             weatherAdapter.items = result
+        }
+
+        _viewModel.weather.observe(viewLifecycleOwner){ weather ->
+            if(weather.current.date.after(Date(weather.current.date.time - 3600000))
+                && weather.current.date.before(weather.current.sunrise)){
+                setBackgroundImage(R.drawable.sunrise)
+            }
+            else if(weather.current.date.after(Date(weather.current.date.time - 3600000))
+                && weather.current.date.before(weather.current.sunset)){
+                setBackgroundImage(R.drawable.sunset)
+            }
+            else if(weather.current.weatherDescription[0].id == 800
+                && weather.current.date < weather.current.sunset){
+                setBackgroundImage(R.drawable.sunny)
+            }
+            else if(weather.current.weatherDescription[0].id == 801
+                && weather.current.date < weather.current.sunset){
+                setBackgroundImage(R.drawable.sun_cloudy)
+            }
+            else if(weather.current.weatherDescription[0].id in 802..804
+                && weather.current.date < weather.current.sunset){
+                setBackgroundImage(R.drawable.cloudy)
+            }
+            else if(weather.current.weatherDescription[0].id == 800
+                && weather.current.date > weather.current.sunset){
+                setBackgroundImage(R.drawable.clear_night)
+            }
+            else if(weather.current.weatherDescription[0].id == 801
+                && weather.current.date > weather.current.sunset){
+                setBackgroundImage(R.drawable.cloudy_night)
+            }
+            else if(weather.current.weatherDescription[0].id in 500..531){
+                setBackgroundImage(R.drawable.rainy)
+            }
+            else if(weather.current.weatherDescription[0].id in 200..232){
+                setBackgroundImage(R.drawable.thunder_storm)
+            }
+            else if(weather.current.weatherDescription[0].id in 600..622){
+                setBackgroundImage(R.drawable.snow)
+            }
         }
 
         requestPermissionLauncher =
@@ -108,6 +151,12 @@ class WeatherFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         startLocationUpdates()
+    }
+
+    private fun setBackgroundImage(drawable: Int){
+        Glide.with(this).load(drawable)
+            .centerCrop()
+            .into(binding.backgroundImage)
     }
 
     @SuppressLint("MissingPermission")

@@ -63,7 +63,7 @@
             <ImageView
                 android:id="@+id/image_temp_today"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent"
@@ -134,7 +134,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_1"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -205,7 +205,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -275,8 +275,8 @@
 
             <ImageView
                 android:id="@+id/image_temp_today_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_3"
                 app:layout_constraintTop_toTopOf="parent"
@@ -348,7 +348,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_4"
                 app:layout_constraintTop_toTopOf="parent"
@@ -419,7 +419,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_5"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_5"
                 app:layout_constraintTop_toTopOf="parent"
@@ -490,7 +490,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_6"
                 app:layout_constraintTop_toTopOf="parent"
@@ -561,7 +561,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_7"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/guideline_7"
                 app:layout_constraintTop_toTopOf="parent"
