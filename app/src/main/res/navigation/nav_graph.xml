@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/weatherFragment">
 
     <fragment
         android:id="@+id/weatherFragment"
         android:name="com.example.android.themeteo.weather.WeatherFragment"
-        android:label="WeatherFragment" />
+        android:label="WeatherFragment"
+        tools:layout = "@layout/fragment_weather">
+        <action
+            android:id="@+id/action_weatherFragment_to_airQualityFragment"
+            app:destination="@id/airQualityFragment" />
+    </fragment>
     <activity
         android:id="@+id/weatherActivity"
         android:name="com.example.android.themeteo.weather.WeatherActivity"
         android:label="WeatherActivity" />
+    <fragment
+        android:id="@+id/airQualityFragment"
+        android:name="com.example.android.themeteo.weather.AirQualityFragment"
+        android:label="AirQualityFragment"
+        tools:layout = "@layout/fragment_air_quality">
+        <argument
+            android:name="airQualityDetails"
+            app:argType="com.example.android.themeteo.weather.WeatherRecyclerViewItem$AirQuality"/>
+    </fragment>
 </navigation>

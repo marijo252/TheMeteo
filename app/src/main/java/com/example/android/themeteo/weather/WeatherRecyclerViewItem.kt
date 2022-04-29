@@ -1,5 +1,7 @@
 package com.example.android.themeteo.weather
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
 sealed class WeatherRecyclerViewItem {
@@ -29,6 +31,7 @@ sealed class WeatherRecyclerViewItem {
         )
     }
 
+    @Parcelize
     data class AirQuality(
         val aqi: Int,
         val co: Double,
@@ -39,5 +42,5 @@ sealed class WeatherRecyclerViewItem {
         val pm2_5: Double,
         val pm10: Double,
         val nh3: Double,
-    ) : WeatherRecyclerViewItem()
+    ) : Parcelable, WeatherRecyclerViewItem()
 }

@@ -14,6 +14,7 @@ data class NetworkAirPollution(
 data class AirPollutionData(
     val main: MainData,
     val components: Components,
+    @Json(name = "dt")
     val date: Date
 )
 

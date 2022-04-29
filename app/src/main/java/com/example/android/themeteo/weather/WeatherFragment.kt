@@ -20,6 +20,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
@@ -43,7 +44,6 @@ class WeatherFragment : Fragment() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private val locationRequest = LocationRequest.create()
-    private val weatherAdapter = WeatherAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,6 +57,10 @@ class WeatherFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.weatherViewModel = _viewModel
 
+        val weatherAdapter = WeatherAdapter{ airQuality ->
+            this.findNavController().navigate(WeatherFragmentDirections.actionWeatherFragmentToAirQualityFragment(airQuality))
+        }
+
         binding.recyclerView.apply {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(requireContext())
@@ -68,11 +72,11 @@ class WeatherFragment : Fragment() {
         }
 
         _viewModel.weather.observe(viewLifecycleOwner){ weather ->
-            if(weather.current.date.after(Date(weather.current.date.time - 3600000))
+            if(weather.current.date.after(Date(weather.current.sunrise.time - 3600000))
                 && weather.current.date.before(weather.current.sunrise)){
                 setBackgroundImage(R.drawable.sunrise)
             }
-            else if(weather.current.date.after(Date(weather.current.date.time - 3600000))
+            else if(weather.current.date.after(Date(weather.current.sunset.time - 3600000))
                 && weather.current.date.before(weather.current.sunset)){
                 setBackgroundImage(R.drawable.sunset)
             }

@@ -1,6 +1,7 @@
 package com.example.android.themeteo.weather
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
@@ -15,7 +16,9 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
-class WeatherAdapter : RecyclerView.Adapter<WeatherViewHolder>() {
+class WeatherAdapter(
+    private val onAirQualitySeeMoreClicked: (WeatherRecyclerViewItem.AirQuality) -> Unit,
+) : RecyclerView.Adapter<WeatherViewHolder>() {
 
     var items = listOf<WeatherRecyclerViewItem>()
         set(value) {
@@ -64,7 +67,8 @@ class WeatherAdapter : RecyclerView.Adapter<WeatherViewHolder>() {
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onAirQualitySeeMoreClicked
             )
             else -> throw IllegalArgumentException("Invalid ViewType Provided")
         }
@@ -223,38 +227,41 @@ sealed class WeatherViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(b
         }
     }
 
-    class AirQuality(private val binding: AirQualityBinding): WeatherViewHolder(binding){
+    class AirQuality(private val binding: AirQualityBinding, private val onAirQualitySeeMoreClicked: (WeatherRecyclerViewItem.AirQuality) -> Unit): WeatherViewHolder(binding){
         fun bind(airQuality: WeatherRecyclerViewItem.AirQuality){
+            binding.seeMoreTab.setOnClickListener {
+                onAirQualitySeeMoreClicked(airQuality)
+            }
             val context = binding.airQualityValue.context
             when(airQuality.aqi){
                 1 -> {
                     binding.airQualityValue.text = context.getString(R.string.air_quality_good)
+                    binding.airQualityDescription.text = context.getString(R.string.air_quality_good_health_information)
                     Glide.with(context).load(R.drawable.air_quality_good)
-                        .centerCrop()
                         .into(binding.airQualityGraphic)
                 }
                 2 -> {
                     binding.airQualityValue.text = context.getString(R.string.air_quality_fair)
+                    binding.airQualityDescription.text = context.getString(R.string.air_quality_fairModerate_health_information)
                     Glide.with(context).load(R.drawable.air_quality_fair)
-                        .centerCrop()
                         .into(binding.airQualityGraphic)
                 }
                 3 -> {
                     binding.airQualityValue.text = context.getString(R.string.air_quality_moderate)
+                    binding.airQualityDescription.text = context.getString(R.string.air_quality_fairModerate_health_information)
                     Glide.with(context).load(R.drawable.air_quality_moderate)
-                        .centerCrop()
                         .into(binding.airQualityGraphic)
                 }
                 4 -> {
                     binding.airQualityValue.text = context.getString(R.string.air_quality_poor)
+                    binding.airQualityDescription.text = context.getString(R.string.air_quality_poorVeryPoor_health_information)
                     Glide.with(context).load(R.drawable.air_quality_poor)
-                        .centerCrop()
                         .into(binding.airQualityGraphic)
                 }
                 5 -> {
                     binding.airQualityValue.text = context.getString(R.string.air_quality_very_poor)
+                    binding.airQualityDescription.text = context.getString(R.string.air_quality_poorVeryPoor_health_information)
                     Glide.with(context).load(R.drawable.air_quality_very_poor)
-                        .centerCrop()
                         .into(binding.airQualityGraphic)
                 }
             }

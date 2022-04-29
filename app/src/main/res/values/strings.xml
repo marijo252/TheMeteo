@@ -3,6 +3,7 @@
     <string name="hourly_forecast">HOURLY FORECAST</string>
     <string name="daily_forecast">DAILY FORECAST</string>
     <string name="air_quality">AIR QUALITY</string>
+    <string name="air_quality_small">Air Quality</string>
     <string name="see_more">See more</string>
     <string name="sunrise_sunset">SUNRISE / SUNSET</string>
     <string name="current_data">CURRENT DATA</string>
@@ -12,10 +13,11 @@
     <string name="wind">WIND</string>
     <string name="visibility">VISIBILITY</string>
     <string name="pressure">PRESSURE</string>
-    <string name="location_required_error">Location services must be enabled to use the app</string>
+    <string name="location_required_error">Location services must be enabled to use the app.</string>
     <string name="permission_denied_explanation">You need to grant location permission in order to select the location.</string>
     <string name="settings">Settings</string>
     <string name="today">Today</string>
+    <string name="intValue">%.0f</string>
     <string name="currentTempValue">%f°</string>
     <string name="temperature">%.0f°</string>
     <string name="humidity_value">%.0f\%%</string>
@@ -27,4 +29,16 @@
     <string name="air_quality_moderate">Moderate</string>
     <string name="air_quality_poor">Poor</string>
     <string name="air_quality_very_poor">Very poor</string>
+    <string name="air_quality_good_health_information">The air quality is good. Enjoy your usual outdoor activities.</string>
+    <string name="air_quality_fairModerate_health_information">Enjoy your usual outdoor activities.</string>
+    <string name="air_quality_poorVeryPoor_health_information">Consider reducing intense activities outdoors, if you experience symptoms such as sore eyes, a cough or sore throat.</string>
+    <string name="scale_title">Scale: European Union (EAQI)</string>
+    <string name="pollutants">Pollutants</string>
+    <string name="pm2_5">Particles less than 2.5 µm (PM2.5)</string>
+    <string name="pm10">Particles less than 10 µm (PM10)</string>
+    <string name="no2">Nitrogen dioxide (NO2)</string>
+    <string name="ozone_o3">Ozone (O3)</string>
+    <string name="sulphur_dioxide_so2">Sulphur dioxide (SO2)</string>
+    <string name="pollutants_concentrations">Current concentrations in µg/m3</string>
+    <string name="index_level">Index level</string>
 </resources>

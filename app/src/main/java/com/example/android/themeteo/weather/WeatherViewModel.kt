@@ -27,8 +27,8 @@ class WeatherViewModel(
     val airPollution: LiveData<AirPollution>
         get() = _airPollution
 
-    private val _weatherRecyclerView = MutableLiveData<List<WeatherRecyclerViewItem>>()
-    val weatherRecyclerView: LiveData<List<WeatherRecyclerViewItem>>
+    private val _weatherRecyclerView = MutableLiveData<MutableList<WeatherRecyclerViewItem>>()
+    val weatherRecyclerView: LiveData<MutableList<WeatherRecyclerViewItem>>
         get() = _weatherRecyclerView
 
     private val _latitude = MutableLiveData<Double>()
@@ -82,7 +82,7 @@ class WeatherViewModel(
                         }
                     )
 
-                    _weatherRecyclerView.value = listOf(
+                    _weatherRecyclerView.value = mutableListOf(
                         todayWeather,
                         TodaySunriseSunset,
                         DailyMeteos,
@@ -107,7 +107,7 @@ class WeatherViewModel(
                         pm10 = airPollution.airPollutionData[0].components.pm10,
                         nh3 = airPollution.airPollutionData[0].components.nh3,
                     )
-                    _weatherRecyclerView.value?.plus(airQuality)
+                    _weatherRecyclerView.value?.add(airQuality)
                 }
                 is Result.Error ->
                     Log.e(TAG, "Error trying to get air Pollution ")
