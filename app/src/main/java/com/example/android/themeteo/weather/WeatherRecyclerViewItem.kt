@@ -43,4 +43,13 @@ sealed class WeatherRecyclerViewItem {
         val pm10: Double,
         val nh3: Double,
     ) : Parcelable, WeatherRecyclerViewItem()
+
+    @Parcelize
+    data class DailyAlerts(
+        val sender: String,
+        val event: String,
+        val start: String,
+        val end: String,
+        val description: String
+    ) : Parcelable, WeatherRecyclerViewItem()
 }

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="airQuality"
             type="com.example.android.themeteo.weather.WeatherRecyclerViewItem.AirQuality" />

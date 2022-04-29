@@ -41,4 +41,9 @@
     <string name="sulphur_dioxide_so2">Sulphur dioxide (SO2)</string>
     <string name="pollutants_concentrations">Current concentrations in µg/m3</string>
     <string name="index_level">Index level</string>
+    <string name="alerts">Alerts</string>
+    <string name="source_name">Source: %s</string>
+    <string name="event_previsions">Event previsions</string>
+    <string name="event_starts">Event starts: %s</string>
+    <string name="event_ends">Event ends: %s</string>
 </resources>

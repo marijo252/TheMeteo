@@ -8,16 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.bumptech.glide.Glide
 import com.example.android.themeteo.R
-import com.example.android.themeteo.databinding.AirQualityBinding
-import com.example.android.themeteo.databinding.DailyMeteoBinding
-import com.example.android.themeteo.databinding.SunriseSunsetBinding
-import com.example.android.themeteo.databinding.TodaysDataBinding
+import com.example.android.themeteo.databinding.*
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.util.*
 
 class WeatherAdapter(
     private val onAirQualitySeeMoreClicked: (WeatherRecyclerViewItem.AirQuality) -> Unit,
+    private val onDailyAlertsSeeMoreClicked: (WeatherRecyclerViewItem.DailyAlerts) -> Unit,
 ) : RecyclerView.Adapter<WeatherViewHolder>() {
 
     var items = listOf<WeatherRecyclerViewItem>()
@@ -36,6 +34,8 @@ class WeatherAdapter(
                     as WeatherRecyclerViewItem.TodayData)
             is WeatherViewHolder.AirQuality -> holder.bind(items[position]
                     as WeatherRecyclerViewItem.AirQuality)
+            is WeatherViewHolder.DailyAlerts -> holder.bind(items[position]
+                    as WeatherRecyclerViewItem.DailyAlerts)
         }
     }
 
@@ -70,6 +70,14 @@ class WeatherAdapter(
                 ),
                 onAirQualitySeeMoreClicked
             )
+            R.layout.daily_alerts -> WeatherViewHolder.DailyAlerts(
+                DailyAlertsBinding.inflate(
+                    LayoutInflater.from(parent.context),
+                    parent,
+                    false
+                ),
+                onDailyAlertsSeeMoreClicked
+            )
             else -> throw IllegalArgumentException("Invalid ViewType Provided")
         }
     }
@@ -82,6 +90,7 @@ class WeatherAdapter(
             is WeatherRecyclerViewItem.TodaySunriseSunset -> R.layout.sunrise_sunset
             is WeatherRecyclerViewItem.TodayData -> R.layout.todays_data
             is WeatherRecyclerViewItem.AirQuality -> R.layout.air_quality
+            is WeatherRecyclerViewItem.DailyAlerts -> R.layout.daily_alerts
         }
     }
 }
@@ -265,6 +274,16 @@ sealed class WeatherViewHolder(binding: ViewBinding) : RecyclerView.ViewHolder(b
                         .into(binding.airQualityGraphic)
                 }
             }
+        }
+    }
+
+    class DailyAlerts(private val binding: DailyAlertsBinding, private val onDailyAlertsSeeMoreClicked: (WeatherRecyclerViewItem.DailyAlerts) -> Unit): WeatherViewHolder(binding){
+        fun bind(dailyAlerts: WeatherRecyclerViewItem.DailyAlerts){
+            binding.seeMoreTab.setOnClickListener {
+                onDailyAlertsSeeMoreClicked(dailyAlerts)
+            }
+            binding.alerts.text = dailyAlerts.event
+            binding.senderName.text = dailyAlerts.sender
         }
     }
 }

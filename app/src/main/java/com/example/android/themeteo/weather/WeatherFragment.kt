@@ -57,9 +57,18 @@ class WeatherFragment : Fragment() {
         binding.lifecycleOwner = this
         binding.weatherViewModel = _viewModel
 
-        val weatherAdapter = WeatherAdapter{ airQuality ->
-            this.findNavController().navigate(WeatherFragmentDirections.actionWeatherFragmentToAirQualityFragment(airQuality))
-        }
+        val weatherAdapter = WeatherAdapter(
+            onAirQualitySeeMoreClicked = { airQuality ->
+                this.findNavController().navigate(
+                    WeatherFragmentDirections.actionWeatherFragmentToAirQualityFragment(airQuality)
+                )
+            },
+            onDailyAlertsSeeMoreClicked = { dailyAlerts ->
+                this.findNavController().navigate(
+                    WeatherFragmentDirections.actionWeatherFragmentToDailyAlertsFragment(dailyAlerts)
+                )
+            },
+        )
 
         binding.recyclerView.apply {
             setHasFixedSize(true)
@@ -67,47 +76,49 @@ class WeatherFragment : Fragment() {
             adapter = weatherAdapter
         }
 
-        _viewModel.weatherRecyclerView.observe(viewLifecycleOwner){ result ->
+        _viewModel.weatherRecyclerView.observe(viewLifecycleOwner) { result ->
             weatherAdapter.items = result
         }
 
-        _viewModel.weather.observe(viewLifecycleOwner){ weather ->
-            if(weather.current.date.after(Date(weather.current.sunrise.time - 3600000))
-                && weather.current.date.before(weather.current.sunrise)){
-                setBackgroundImage(R.drawable.sunrise)
-            }
-            else if(weather.current.date.after(Date(weather.current.sunset.time - 3600000))
-                && weather.current.date.before(weather.current.sunset)){
-                setBackgroundImage(R.drawable.sunset)
-            }
-            else if(weather.current.weatherDescription[0].id == 800
-                && weather.current.date < weather.current.sunset){
-                setBackgroundImage(R.drawable.sunny)
-            }
-            else if(weather.current.weatherDescription[0].id == 801
-                && weather.current.date < weather.current.sunset){
-                setBackgroundImage(R.drawable.sun_cloudy)
-            }
-            else if(weather.current.weatherDescription[0].id in 802..804
-                && weather.current.date < weather.current.sunset){
-                setBackgroundImage(R.drawable.cloudy)
-            }
-            else if(weather.current.weatherDescription[0].id == 800
-                && weather.current.date > weather.current.sunset){
-                setBackgroundImage(R.drawable.clear_night)
-            }
-            else if(weather.current.weatherDescription[0].id == 801
-                && weather.current.date > weather.current.sunset){
-                setBackgroundImage(R.drawable.cloudy_night)
-            }
-            else if(weather.current.weatherDescription[0].id in 500..531){
+        _viewModel.weather.observe(viewLifecycleOwner) { weather ->
+            if (weather.current.weatherDescription[0].id in 500..531) {
                 setBackgroundImage(R.drawable.rainy)
-            }
-            else if(weather.current.weatherDescription[0].id in 200..232){
+            } else if (weather.current.weatherDescription[0].id in 200..232) {
                 setBackgroundImage(R.drawable.thunder_storm)
-            }
-            else if(weather.current.weatherDescription[0].id in 600..622){
+            } else if (weather.current.weatherDescription[0].id in 600..622) {
                 setBackgroundImage(R.drawable.snow)
+            } else if (weather.current.weatherDescription[0].id in 802..804) {
+                setBackgroundImage(R.drawable.cloudy)
+            } else if (weather.current.date.after(Date(weather.current.sunrise.time - 3600000))
+                && weather.current.date.before(weather.current.sunrise)
+            ) {
+                setBackgroundImage(R.drawable.sunrise)
+            } else if (weather.current.date.after(Date(weather.current.sunset.time - 3600000))
+                && weather.current.date.before(weather.current.sunset)
+            ) {
+                setBackgroundImage(R.drawable.sunset)
+            } else if (weather.current.date.after(weather.current.sunrise)
+                && weather.current.date.before(
+                    weather.current.sunset
+                )
+            ) {
+                if (weather.current.weatherDescription[0].id == 800) {
+                    setBackgroundImage(R.drawable.sunny)
+                } else if (weather.current.weatherDescription[0].id == 801) {
+                    setBackgroundImage(R.drawable.sun_cloudy)
+                }
+            } else if (weather.current.date.after(weather.current.sunset)
+                || weather.current.date.before(
+                    weather.current.sunrise
+                )
+            ) {
+                if (weather.current.weatherDescription[0].id == 800) {
+                    setBackgroundImage(R.drawable.clear_night)
+                } else if (weather.current.weatherDescription[0].id == 801) {
+                    setBackgroundImage(R.drawable.cloudy_night)
+                }
+            } else{
+                setBackgroundImage(R.drawable.sunny)
             }
         }
 
@@ -126,7 +137,10 @@ class WeatherFragment : Fragment() {
                             // Displays App settings screen.
                             startActivity(Intent().apply {
                                 action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                                data = Uri.fromParts("package", BuildConfig.APPLICATION_ID, null)
+                                data = Uri.fromParts(
+                                    "package",
+                                    BuildConfig.APPLICATION_ID,
+                                    null)
                                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
                             })
                         }.show()
@@ -157,7 +171,7 @@ class WeatherFragment : Fragment() {
         startLocationUpdates()
     }
 
-    private fun setBackgroundImage(drawable: Int){
+    private fun setBackgroundImage(drawable: Int) {
         Glide.with(this).load(drawable)
             .centerCrop()
             .into(binding.backgroundImage)
@@ -214,7 +228,7 @@ class WeatherFragment : Fragment() {
                 } catch (ex: IntentSender.SendIntentException) {
                     Log.d(TAG, "Error getting location settings: " + ex.message)
                 }
-            } else{
+            } else {
                 Snackbar.make(
                     binding.root,
                     R.string.location_required_error, Snackbar.LENGTH_INDEFINITE
@@ -255,7 +269,8 @@ class WeatherFragment : Fragment() {
 
     private fun requestForegroundLocationPermission() {
         requestPermissionLauncher.launch(
-            Manifest.permission.ACCESS_FINE_LOCATION)
+            Manifest.permission.ACCESS_FINE_LOCATION
+        )
     }
 
     companion object {

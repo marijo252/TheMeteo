@@ -66,12 +66,12 @@ class WeatherViewModel(
 
                     val dateFormat = SimpleDateFormat("h:mm a")
 
-                    val TodaySunriseSunset = WeatherRecyclerViewItem.TodaySunriseSunset(
+                    val todaySunriseSunset = WeatherRecyclerViewItem.TodaySunriseSunset(
                         sunrise = dateFormat.format(weather.current.sunrise),
                         sunset = dateFormat.format(weather.current.sunset.time),
                     )
 
-                    val DailyMeteos = WeatherRecyclerViewItem.DailyMeteos(
+                    val dailyMeteos = WeatherRecyclerViewItem.DailyMeteos(
                         dailyData = weather.daily.map {
                             WeatherRecyclerViewItem.DailyMeteos.DailyMeteo(
                                 date = it.date,
@@ -81,12 +81,22 @@ class WeatherViewModel(
                             )
                         }
                     )
-
                     _weatherRecyclerView.value = mutableListOf(
                         todayWeather,
-                        TodaySunriseSunset,
-                        DailyMeteos,
+                        todaySunriseSunset,
+                        dailyMeteos,
                     )
+                    if(weather.alerts != null){
+                        val dateFormatForDailyAlerts = SimpleDateFormat("dd-MM-yyyy h:mm a")
+                        val dailyAlerts = WeatherRecyclerViewItem.DailyAlerts(
+                            sender = weather.alerts[0].senderName,
+                            event = weather.alerts[0].event,
+                            start = dateFormatForDailyAlerts.format(weather.alerts[0].eventStart),
+                            end = dateFormatForDailyAlerts.format(weather.alerts[0].eventEnd),
+                            description = weather.alerts[0].description
+                        )
+                        _weatherRecyclerView.value?.add(0,dailyAlerts)
+                    }
                 }
                 is Result.Error ->
                     Log.e(TAG, "Error trying to get weather ")

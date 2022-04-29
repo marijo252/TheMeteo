@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_weatherFragment_to_airQualityFragment"
             app:destination="@id/airQualityFragment" />
+        <action
+            android:id="@+id/action_weatherFragment_to_dailyAlertsFragment"
+            app:destination="@id/dailyAlertsFragment" />
     </fragment>
     <activity
         android:id="@+id/weatherActivity"
@@ -26,5 +29,14 @@
         <argument
             android:name="airQualityDetails"
             app:argType="com.example.android.themeteo.weather.WeatherRecyclerViewItem$AirQuality"/>
+    </fragment>
+    <fragment
+        android:id="@+id/dailyAlertsFragment"
+        android:name="com.example.android.themeteo.weather.DailyAlertsFragment"
+        android:label="DailyAlertsFragment"
+        tools:layout = "@layout/fragment_daily_alerts">
+        <argument
+            android:name="dailyAlertsDetails"
+            app:argType="com.example.android.themeteo.weather.WeatherRecyclerViewItem$DailyAlerts"/>
     </fragment>
 </navigation>
