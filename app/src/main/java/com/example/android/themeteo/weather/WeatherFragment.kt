@@ -15,6 +15,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -44,6 +45,8 @@ class WeatherFragment : Fragment() {
     private lateinit var locationCallback: LocationCallback
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     private val locationRequest = LocationRequest.create()
+    private var latitude = 0.0
+    private var longitude = 0.0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +59,11 @@ class WeatherFragment : Fragment() {
             )
         binding.lifecycleOwner = this
         binding.weatherViewModel = _viewModel
+
+        if(savedInstanceState != null){
+            latitude = savedInstanceState.getDouble(LATITUDE)
+            longitude = savedInstanceState.getDouble(LONGITUDE)
+        }
 
         val weatherAdapter = WeatherAdapter(
             onAirQualitySeeMoreClicked = { airQuality ->
@@ -78,6 +86,21 @@ class WeatherFragment : Fragment() {
 
         _viewModel.weatherRecyclerView.observe(viewLifecycleOwner) { result ->
             weatherAdapter.items = result
+        }
+
+        _viewModel.showLoading.observe(viewLifecycleOwner){
+            if(it){
+                binding.statusLoadingWheel.visibility = View.VISIBLE
+                binding.currentTemperature.visibility = View.GONE
+                binding.city.visibility = View.GONE
+                binding.currentWeatherDesc.visibility = View.GONE
+            }
+            else{
+                binding.statusLoadingWheel.visibility = View.GONE
+                binding.currentTemperature.visibility = View.VISIBLE
+                binding.city.visibility = View.VISIBLE
+                binding.currentWeatherDesc.visibility = View.VISIBLE
+            }
         }
 
         _viewModel.weather.observe(viewLifecycleOwner) { weather ->
@@ -129,6 +152,8 @@ class WeatherFragment : Fragment() {
                 if (isGranted) {
                     checkDeviceLocationSettings()
                 } else {
+                    binding.locationDeniedImage.visibility = View.VISIBLE
+                    binding.locationDeniedText.visibility = View.VISIBLE
                     Snackbar.make(
                         binding.root,
                         R.string.permission_denied_explanation, Snackbar.LENGTH_INDEFINITE
@@ -152,6 +177,8 @@ class WeatherFragment : Fragment() {
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
+                binding.locationDeniedImage.visibility = View.GONE
+                binding.locationDeniedText.visibility = View.GONE
                 for (location in locationResult.locations) {
                     setDeviceLocation()
                 }
@@ -159,6 +186,12 @@ class WeatherFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putDouble(LATITUDE, latitude)
+        outState.putDouble(LONGITUDE, longitude)
     }
 
     override fun onStart() {
@@ -229,16 +262,18 @@ class WeatherFragment : Fragment() {
                     Log.d(TAG, "Error getting location settings: " + ex.message)
                 }
             } else {
-                Snackbar.make(
-                    binding.root,
-                    R.string.location_required_error, Snackbar.LENGTH_INDEFINITE
-                ).setAction(android.R.string.ok) {
-                    checkDeviceLocationSettings()
-                }.show()
+                binding.locationDeniedImage.visibility = View.VISIBLE
+                binding.locationDeniedText.visibility = View.VISIBLE
+                Toast.makeText(requireContext(),
+                    R.string.location_required_error,
+                    Toast.LENGTH_LONG,
+                ).show()
             }
         }
 
         task.addOnSuccessListener { locationSettingsResponse ->
+            binding.locationDeniedImage.visibility = View.GONE
+            binding.locationDeniedText.visibility = View.GONE
             setDeviceLocation()
         }
 
@@ -249,7 +284,9 @@ class WeatherFragment : Fragment() {
         fusedLocationClient.lastLocation
             .addOnSuccessListener { location: Location? ->
                 if (location != null) {
-                    _viewModel.updateLocation(location.latitude, location.longitude)
+                    latitude = location.latitude
+                    longitude = location.longitude
+                    _viewModel.updateLocation(latitude, longitude)
                     _viewModel.refreshWeatherAndGetData()
                 } else {
                     Log.e(TAG, "location is off")
@@ -276,7 +313,8 @@ class WeatherFragment : Fragment() {
     companion object {
         private const val REQUEST_CHECK_SETTINGS = 29
         private const val TAG = "WeatherFragment"
-        private const val REQUEST_FOREGROUND_PERMISSION_REQUEST_CODE = 30
+        private const val LATITUDE = "Latitude"
+        private const val LONGITUDE = "Longitude"
     }
 
 }

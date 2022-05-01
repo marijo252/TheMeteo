@@ -46,4 +46,7 @@
     <string name="event_previsions">Event previsions</string>
     <string name="event_starts">Event starts: %s</string>
     <string name="event_ends">Event ends: %s</string>
+    <string name="current_location">Current Location</string>
+    <string name="background_image">Background image</string>
+    <string name="no_data">No weather data can be shown</string>
 </resources>

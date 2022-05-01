@@ -21,8 +21,8 @@ class Repository (
         try{
             val weather = Network.retrofitService.getWeather(latitude, longitude)
             val airPollution = Network.retrofitService.getAirPollution(latitude, longitude)
-            weatherDao.insert(airPollution.asDatabaseEntity())
-            weatherDao.insert(weather.asDatabaseEntity())
+            weatherDao.clearAndInsertAirPollution(airPollution.asDatabaseEntity())
+            weatherDao.clearAndInsertWeather(weather.asDatabaseEntity())
         }catch (ex: Exception){
             Log.e(TAG,"error: $ex")
         }

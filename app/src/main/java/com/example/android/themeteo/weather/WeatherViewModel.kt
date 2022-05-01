@@ -24,8 +24,6 @@ class WeatherViewModel(
         get() = _weather
 
     private val _airPollution = MutableLiveData<AirPollution>()
-    val airPollution: LiveData<AirPollution>
-        get() = _airPollution
 
     private val _weatherRecyclerView = MutableLiveData<MutableList<WeatherRecyclerViewItem>>()
     val weatherRecyclerView: LiveData<MutableList<WeatherRecyclerViewItem>>
@@ -39,9 +37,17 @@ class WeatherViewModel(
     val longitude: LiveData<Double>
         get() = _longitude
 
+    private val _showLoading = MutableLiveData<Boolean>()
+    val showLoading: LiveData<Boolean>
+        get() = _showLoading
+
     fun updateLocation(latitude: Double, longitude: Double) {
         _latitude.value = latitude
         _longitude.value = longitude
+    }
+
+    init {
+        _showLoading.value = true
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -50,6 +56,7 @@ class WeatherViewModel(
             dataSource.refreshWeather(latitude.value!!, longitude.value!!)
             val weatherResult = dataSource.getWeather()
             val airPollutionResult = dataSource.getAirPollution()
+            _showLoading.postValue(false)
             when (weatherResult) {
                 is Result.Success<*> -> {
                     val weather = weatherResult.data as Weather

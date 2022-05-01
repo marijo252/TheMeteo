@@ -12,10 +12,18 @@
         tools:layout = "@layout/fragment_weather">
         <action
             android:id="@+id/action_weatherFragment_to_airQualityFragment"
-            app:destination="@id/airQualityFragment" />
+            app:destination="@id/airQualityFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
         <action
             android:id="@+id/action_weatherFragment_to_dailyAlertsFragment"
-            app:destination="@id/dailyAlertsFragment" />
+            app:destination="@id/dailyAlertsFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
     </fragment>
     <activity
         android:id="@+id/weatherActivity"
