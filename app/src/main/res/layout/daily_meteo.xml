@@ -6,7 +6,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="@dimen/margin_16"
         android:background="@drawable/container">
 
 
@@ -17,7 +17,7 @@
             android:fontFamily="@font/roboto"
             android:text="@string/daily_forecast"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -25,8 +25,8 @@
         <View
             android:id="@+id/divider"
             android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:layout_marginTop="8dp"
+            android:layout_height="@dimen/layout_height_divider"
+            android:layout_marginTop="@dimen/margin_8"
             android:background="?android:attr/listDivider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
             <ImageView
                 android:id="@+id/image_temp_today"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline"
                 app:layout_constraintTop_toTopOf="parent"
@@ -73,8 +73,8 @@
                 android:id="@+id/lowest_temp_today"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today"
@@ -94,12 +94,10 @@
             <View
                 android:id="@+id/divider_1"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -108,7 +106,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_today">
 
@@ -134,7 +131,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_1"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_1"
                 app:layout_constraintTop_toTopOf="parent"
@@ -144,8 +141,8 @@
                 android:id="@+id/lowest_temp_today_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_1"
@@ -165,8 +162,7 @@
             <View
                 android:id="@+id/divider_2"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -179,7 +175,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_today_1">
 
@@ -205,7 +200,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_2"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_2"
                 app:layout_constraintTop_toTopOf="parent"
@@ -215,8 +210,8 @@
                 android:id="@+id/lowest_temp_today_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_2"
@@ -236,12 +231,10 @@
             <View
                 android:id="@+id/divider_3"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -250,7 +243,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_today_2">
 
@@ -276,19 +268,18 @@
             <ImageView
                 android:id="@+id/image_temp_today_3"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_3"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 app:srcCompat="@drawable/d_few_clouds" />
 
             <TextView
                 android:id="@+id/lowest_temp_today_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_3"
@@ -308,12 +299,10 @@
             <View
                 android:id="@+id/divider_4"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -322,7 +311,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_today_3">
 
@@ -348,7 +336,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_4"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_4"
                 app:layout_constraintTop_toTopOf="parent"
@@ -358,8 +346,8 @@
                 android:id="@+id/lowest_temp_today_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_4"
@@ -379,12 +367,10 @@
             <View
                 android:id="@+id/divider_5"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -419,7 +405,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_5"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_5"
                 app:layout_constraintTop_toTopOf="parent"
@@ -429,8 +415,8 @@
                 android:id="@+id/lowest_temp_today_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_5"
@@ -450,12 +436,10 @@
             <View
                 android:id="@+id/divider_6"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -464,7 +448,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/container_today_5">
 
@@ -490,7 +473,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_6"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/guideline_6"
                 app:layout_constraintTop_toTopOf="parent"
@@ -500,8 +483,8 @@
                 android:id="@+id/lowest_temp_today_6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_6"
@@ -521,12 +504,10 @@
             <View
                 android:id="@+id/divider_7"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -561,7 +542,7 @@
             <ImageView
                 android:id="@+id/image_temp_today_7"
                 android:layout_width="wrap_content"
-                android:layout_height="50dp"
+                android:layout_height="@dimen/image_temp_today_height"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/guideline_7"
                 app:layout_constraintTop_toTopOf="parent"
@@ -571,8 +552,8 @@
                 android:id="@+id/lowest_temp_today_7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="30dp"
-                android:alpha="0.7"
+                android:layout_marginEnd="@dimen/margin_end_lowest_temp"
+                android:alpha="@dimen/alpha_lowest_temperature"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/max_temp_today_7"
@@ -592,12 +573,10 @@
             <View
                 android:id="@+id/divider_8"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginEnd="2dp"
+                android:layout_height="@dimen/layout_height_divider"
                 android:background="?android:attr/listDivider"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 

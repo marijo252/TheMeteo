@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="current_temperature_size">50sp</dimen>
+    <dimen name="margin_16">16dp</dimen>
+    <dimen name="margin_8">8dp</dimen>
+    <dimen name="text_size_14">14sp</dimen>
+    <dimen name="text_size_16">16sp</dimen>
+    <dimen name="text_size_20">20sp</dimen>
+    <dimen name="text_size_34">34sp</dimen>
+    <dimen name="layout_height_divider">1dp</dimen>
+    <dimen name="image_temp_today_height">30dp</dimen>
+    <dimen name="margin_end_lowest_temp">30dp</dimen>
+    <dimen name="alpha_lowest_temperature">0.7</dimen>
+    <dimen name="location_denied_dimension">150dp</dimen>
+    <dimen name="margin_10">10dp</dimen>
+    <dimen name="sunrise_sunset_dimension">50dp</dimen>
+</resources>
