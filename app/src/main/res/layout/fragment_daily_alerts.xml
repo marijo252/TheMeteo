@@ -14,137 +14,158 @@
         android:layout_height="match_parent"
         android:background="@color/background_view">
 
-        <TextView
-            android:id="@+id/alerts_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/alerts"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/alertImage"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alerts_title"
-            app:srcCompat="?android:attr/alertDialogIcon"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/air_quality_value_details"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:fontFamily="@font/roboto_bold"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20"
-            android:text="@{dailyAlerts.event}"
-            app:layout_constraintBottom_toBottomOf="@+id/alertImage"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/alertImage"
-            app:layout_constraintTop_toTopOf="@+id/alertImage"
-            tools:text="Yellow Thunderstorm Warning" />
-
-        <TextView
-            android:id="@+id/air_quality_message"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:text="@{@string/source_name(dailyAlerts.sender)}"
-            android:textColor="@color/subtitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/air_quality_value_details"
-            tools:text="Source: Italian Air Force National Meteorological Service." />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/alert_description_container"
+        <ScrollView
+            android:id="@+id/scrollview_daily_alerts"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:background="@drawable/conatiner_air_quality"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_height="match_parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/air_quality_message">
-
-            <TextView
-                android:id="@+id/alert_description"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{dailyAlerts.description}"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="No Special Awareness Required\n (DISCLAIMER: Information provided on METEOALARM for Italy regard only the intensity and recurrence of the phenomena, further details can be found at www.meteoam.it. METEOALARM information do not provide the assessment of impact on the territory and they do not represent the Official Alerts messages that are issued by the National Civil Protection Service www.protezionecivile.it)" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/event_previsions_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_16"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:fontFamily="@font/roboto_bold"
-            android:text="@string/event_previsions"
-            android:textColor="@color/white"
-            android:textSize="@dimen/text_size_20"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/alert_description_container" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/event_previsions_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
-            android:layout_marginEnd="@dimen/margin_16"
-            android:background="@drawable/conatiner_air_quality"
-            android:orientation="vertical"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/event_previsions_title" >
-
-            <TextView
-                android:id="@+id/event_start"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/container_daily_alerts"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{@string/event_starts(dailyAlerts.start)}"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Event starts: 30/04/2022 8:00 am" />
+                android:layout_height="wrap_content">
 
-            <TextView
-                android:id="@+id/event_ends"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_8"
-                android:text="@{@string/event_ends(dailyAlerts.end)}"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/event_start"
-                tools:text="Event ends: 30/04/2022 5:00 pm" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/alerts_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/alerts"
+                    android:textAlignment="center"
+                    android:textColor="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/alertImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/alerts_title"
+                    app:srcCompat="?android:attr/alertDialogIcon"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/air_quality_value_details"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20"
+                    android:text="@{dailyAlerts.event}"
+                    app:layout_constraintBottom_toBottomOf="@+id/alertImage"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/alertImage"
+                    app:layout_constraintTop_toTopOf="@+id/alertImage"
+                    tools:text="Yellow Thunderstorm Warning" />
+
+                <TextView
+                    android:id="@+id/air_quality_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:text="@{@string/source_name(dailyAlerts.sender)}"
+                    android:textColor="@color/subtitle"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/air_quality_value_details"
+                    tools:text="Source: Italian Air Force National Meteorological Service." />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/alert_description_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:background="@drawable/conatiner_air_quality"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/air_quality_message">
+
+                    <TextView
+                        android:id="@+id/alert_description"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{dailyAlerts.description}"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="No Special Awareness Required\n (DISCLAIMER: Information provided on METEOALARM for Italy regard only the intensity and recurrence of the phenomena, further details can be found at www.meteoam.it. METEOALARM information do not provide the assessment of impact on the territory and they do not represent the Official Alerts messages that are issued by the National Civil Protection Service www.protezionecivile.it)" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <TextView
+                    android:id="@+id/event_previsions_title"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_16"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/event_previsions"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/text_size_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/alert_description_container" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/event_previsions_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_16"
+                    android:layout_marginTop="@dimen/margin_8"
+                    android:layout_marginEnd="@dimen/margin_16"
+                    android:background="@drawable/conatiner_air_quality"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/event_previsions_title" >
+
+                    <TextView
+                        android:id="@+id/event_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{@string/event_starts(dailyAlerts.start)}"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="Event starts: 30/04/2022 8:00 am" />
+
+                    <TextView
+                        android:id="@+id/event_ends"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/margin_8"
+                        android:text="@{@string/event_ends(dailyAlerts.end)}"
+                        android:textColor="@color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/event_start"
+                        tools:text="Event ends: 30/04/2022 5:00 pm" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

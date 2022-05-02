@@ -18,6 +18,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -63,6 +64,7 @@ class WeatherFragment : Fragment() {
         if(savedInstanceState != null){
             latitude = savedInstanceState.getDouble(LATITUDE)
             longitude = savedInstanceState.getDouble(LONGITUDE)
+            binding.motionLayoutContainer.transitionToState(savedInstanceState.getInt(MOTION_LAYOUT_STATE))
         }
 
         val weatherAdapter = WeatherAdapter(
@@ -192,6 +194,7 @@ class WeatherFragment : Fragment() {
         super.onSaveInstanceState(outState)
         outState.putDouble(LATITUDE, latitude)
         outState.putDouble(LONGITUDE, longitude)
+        outState.putInt(MOTION_LAYOUT_STATE,binding.motionLayoutContainer.currentState)
     }
 
     override fun onStart() {
@@ -315,6 +318,7 @@ class WeatherFragment : Fragment() {
         private const val TAG = "WeatherFragment"
         private const val LATITUDE = "Latitude"
         private const val LONGITUDE = "Longitude"
+        private const val MOTION_LAYOUT_STATE = "MotionLayoutState"
     }
 
 }
