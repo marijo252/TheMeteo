@@ -1,0 +1,2 @@
+# TheMeteo
+TheMeteo is the capstone project of the Android Udacity nanodegree program and is an application were it was asked to use all the concepts learned through the entire course. I decided to create Weather application that shows the current weather data and air quality of the user location. To find out more details about the project you can open the file "THE METEO.pdf" present in this repo.
